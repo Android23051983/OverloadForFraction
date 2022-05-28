@@ -132,11 +132,14 @@ void main()
 {
     setlocale(LC_ALL, "RUSSIAN");
     fraction C;
+    C.print();
+    cout << "------------------------------------------------------\n";
     fraction A(2, 10);
     A.print();
     cout << "------------------------------------------------------\n";
     fraction B(5, 7);
     B.print();
+    cout << "------------------------------------------------------\n";
     C = A.operator-(B);
     C.reduce();
     C.print();
