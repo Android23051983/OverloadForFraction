@@ -1,4 +1,3 @@
-/*Программа для демонстрации сложения, вычитания и умножения двух дробей*/
 #include <iostream>
 #include<cmath>
 using namespace std;
@@ -14,6 +13,7 @@ class fraction {
    int denominator;
 
 public:
+    
     int get_numerator()const
     {
         return numerator;
@@ -30,6 +30,7 @@ public:
     }
     void set_denominator(int denominator)
     {
+        if (denominator == 0)denominator = 1;
         this->denominator = denominator;
     }
 
@@ -58,7 +59,7 @@ public:
         {
             if ((i % a == 0) && (i % b == 0))
             {
-            return i;
+                return i;
             }
         }
     }
@@ -74,12 +75,12 @@ public:
     fraction(long numerator = 1, long denominator = 1)
     {
         this->numerator = numerator;
-        this->denominator = denominator;
+        this->set_denominator(denominator);
     }
 
     ~fraction()
     {
-        cout << "Distructor: \t\t" << this << endl;
+        cout << "Destructor: \t\t" << this << endl;
     }
 
     //Рабочая 
