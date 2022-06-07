@@ -1,5 +1,5 @@
 #include <iostream>
-#include<cmath>
+#include <cstring>
 using namespace std;
 
 using std::string;
@@ -20,7 +20,7 @@ class fraction {
     int denominator;
 
 public:
-    int get_integer()
+    int get_integer()const
     {
         return integer;
     }
@@ -56,7 +56,7 @@ public:
         this->denominator = 1;
         cout << "DefaultConstructor:\t" << this << endl;
     }
-    fraction(int integer)
+    explicit fraction(int integer)
     {
         this->integer = integer;
         this->numerator = 0;
@@ -67,7 +67,7 @@ public:
     {
         this->integer = 0;
         this->numerator = numerator;
-        this->denominator = denomenator;
+        this->set_denominator(denomenator);
         cout << "Constructor:\t\t" << this << endl;
     }
 
@@ -76,6 +76,7 @@ public:
         this->integer = integer;
         this->numerator = numerator;
         this->set_denominator(denominator);
+        cout << "Constructor:\t\t" << this << endl;
     }
     fraction(const fraction& other)
     {
@@ -90,7 +91,7 @@ public:
         cout << "Destructor: \t\t" << this << endl;
     }
 
-
+    //              Operators:
     fraction& operator=(const fraction& other)
     {
         this->integer = other.integer;
@@ -119,7 +120,15 @@ public:
         return *this = *this - other;
     }
 
-    //increment, Decrement
+    fraction& operator()(int integer, int numerator, int denominator)
+    {
+        set_integer(integer);
+        set_numerator(numerator);
+        set_denominator(denominator);
+        return *this;
+    }
+
+    //          increment, Decrement
 
     fraction& operator++() //Prefix increment
     {
@@ -147,7 +156,18 @@ public:
         return old;
     }
 
-    // Metods
+    //      Type-cast operators;
+    explicit operator int()const
+    {
+        return this->integer;
+    }
+
+    operator double()const
+    {
+        return integer + (double)numerator/denominator;
+    }
+
+    //      Metods
     fraction& to_improper() 
     {
         numerator += integer * denominator;
@@ -227,14 +247,19 @@ bool operator==(fraction left, fraction right) {
 
     left.to_improper();
     right.to_improper();
-    if (left.get_numerator() * right.get_denominator() == right.get_numerator() * left.get_denominator())
+   /* if (left.get_numerator() * right.get_denominator() == right.get_numerator() * left.get_denominator())
         return true;
     else
-        return false;
-    return left.get_numerator() * right.get_denominator() == right.get_numerator() * left.get_denominator();
+        return false;*/
+    //return left.get_numerator() * right.get_denominator() == right.get_numerator() * left.get_denominator();
     return
         left.to_improper().get_numerator() * right.get_denominator() ==
         right.to_improper().get_numerator() * left.get_denominator();
+}
+
+bool operator!=(const fraction& left, const fraction& right)
+{
+    return !(left == right);
 }
 
 bool operator>(fraction left, fraction right)
@@ -252,7 +277,8 @@ bool operator<(fraction left, fraction right)
 
 bool operator>=(const fraction& left, const fraction& right)
 {
-    return left > right || left == right;
+    //return left > right || left == right;
+    return !(left < right);
 }
 
 bool operator<=(const fraction& left, const fraction& right)
@@ -260,9 +286,56 @@ bool operator<=(const fraction& left, const fraction& right)
     return left < right || left == right;
 }
 
+std::ostream& operator<<(std::ostream& os, const fraction& obj)
+{
+    if (obj.get_integer())os << obj.get_integer();
+    if (obj.get_numerator())
+    {
+        if (obj.get_integer())os << "(";
+        os << obj.get_numerator() << "/" << obj.get_denominator();
+        if (obj.get_integer())os << ")";
+    }
+    if (!obj.get_integer() && !obj.get_numerator())os << 0;
+    return os;
+}
+std::istream& operator>>(std::istream& is, fraction& obj)
+{
+    /*int integer, numerator, denominator;
+    cin >> integer >> numerator >> denominator;
+    obj(integer, numerator, denominator);*/
+    const int SIZE = 256;
+    char sz_buffer[SIZE] = {};//sz_ - String Zero
+    //is >> sz_buffer;
+    is.getline(sz_buffer, SIZE);
+    char* sz_numbers[3] = {};
+    char sz_delimiters[] = "() /";
+    //https://cplusplus.com/reference/cstring/
+    //https://cplusplus.com/reference/cstring/strtok/
+    int n = 0;	//Индекс элемента в массиве с подстроками (токенами) sz_numbers
+    for (char* pch = strtok(sz_buffer, sz_delimiters); pch; pch = strtok(NULL, sz_delimiters))
+    {
+        sz_numbers[n++] = pch;
+    }
+    //for (int i = 0; i < n; i++)cout << sz_numbers[i] << "\t"; cout << endl;
+    obj = fraction();
+    switch (n)
+    {
+        //atoi() - ASCII-string to int (функция преобразования строки в int)
+    case 1: obj.set_integer(atoi(sz_numbers[0])); break;
+    case 2:
+        obj.set_numerator(atoi(sz_numbers[0]));
+        obj.set_denominator(atoi(sz_numbers[1]));
+        break;
+    case 3:obj(atoi(sz_numbers[0]), atoi(sz_numbers[1]), atoi(sz_numbers[2]));
+    }
+    return is;
+}
 
 //#define CONSTRUCTORS_CHECK
-#define COMPARISON_OPERATOR
+//#define COMPARISON_OPERATOR
+//#define CONVERTION_FROM_CLASS_TO_OTHER
+//#define COVERSIONS_HOME_WORK
+
     void main()
     {
         setlocale(LC_ALL, "RUSSIAN");
@@ -286,14 +359,15 @@ bool operator<=(const fraction& left, const fraction& right)
         F = E;
         E.print();
 #endif // CONSTRUCTORS_CHECK
-        fraction A(2, 3, 4);
-        A.print();
+       /* fraction A(2, 3, 4);
+        cout << A<<endl;
+        A.print();*/
         /*A.to_imnroper();
         A.print();
         A.to_proper();
         A.print();*/
-        fraction B(3, 4, 5);
-        B.print();
+       /* fraction B(3, 4, 5);
+        B.print();*/
 
       /*  fraction C = A * B;
         C.print();
@@ -317,6 +391,39 @@ bool operator<=(const fraction& left, const fraction& right)
         cout << "(operator <) " << (A < B) << endl;
 
 #endif // COMPARISON_OPERATOR
+#ifdef CONVERTION_FROM_CLASS_TO_OTHER
+
+        fraction A(2, 3, 4);
+        cout << A << endl;
+        int a = A;
+        cout << a << endl;
+
+        double b = A;
+        cout << b << endl;
+#endif // CONVERTION_FROM_CLASS_TO_OTHER
+
+#ifdef COVERSIONS_HOME_WORK
+        fraction A = 2.75;
+        cout << A << endl;
+#endif // COVERSIONS_HOME_WORK
+
+        fraction A;
+        cout << "Введите простую дробь:"; 
+        cin >> A;
+
+        cout << A << endl;
+
+        /*
+
+        --------------------------------------------------
+        5
+        1/20
+        2(2/3)
+        2 3/4
+        --------------------------------------------------
+
+        */
+
     }
 
     
