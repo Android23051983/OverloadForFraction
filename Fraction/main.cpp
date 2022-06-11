@@ -48,6 +48,43 @@ public:
         this->denominator = denominator;
     }
 
+    //Наибольший общий делитель
+   //(англ.) Greatest Common Divisor
+    int gcd(long a, long b) {
+        a = abs(a), b = abs(b);
+        while (a != b) {
+            if (a > b)
+            {
+                long temp = a;
+                a = b;
+                b = temp;
+            }
+            b = b - a;
+        }
+        return a;
+    }
+
+    //Наименьшее общее кратное
+  // (англ.) least common multiple
+    int lcm(long a, long b) {
+        int max = b;
+        for (int i = max; i > 0; i++)
+        {
+            if ((i % a == 0) && (i % b == 0))
+            {
+                return i;
+            }
+        }
+    }
+
+    fraction& reduce() {
+        int r = gcd(numerator, denominator);
+        numerator /= r;
+        denominator /= r;
+        cout << "Reduce" << endl;
+        return *this;
+    }
+
 
     fraction()
     {
@@ -56,12 +93,21 @@ public:
         this->denominator = 1;
         cout << "DefaultConstructor:\t" << this << endl;
     }
-    explicit fraction(int integer)
+    fraction(int integer)
     {
         this->integer = integer;
         this->numerator = 0;
         this->denominator = 1;
         cout << "largConstructor:\t" << this << endl;
+    }
+    fraction(double value)
+    {
+        integer = value;
+        value -= integer;
+        denominator = 1e+9;
+        numerator = value * denominator;
+        cout << "DoubleConstructor:\t" << this << endl;
+        reduce();
     }
     fraction(int numerator, int denomenator)
     {
@@ -162,7 +208,7 @@ public:
         return this->integer;
     }
 
-    operator double()const
+    explicit operator double()const
     {
         return integer + (double)numerator/denominator;
     }
@@ -308,10 +354,10 @@ std::istream& operator>>(std::istream& is, fraction& obj)
     //is >> sz_buffer;
     is.getline(sz_buffer, SIZE);
     char* sz_numbers[3] = {};
-    char sz_delimiters[] = "() /";
+    char sz_delimiters[] = "() /.";
     //https://cplusplus.com/reference/cstring/
     //https://cplusplus.com/reference/cstring/strtok/
-    int n = 0;	//Индекс элемента в массиве с подстроками (токенами) sz_numbers
+    int n = 0;//Индекс элемента в массиве с подстроками (токенами) sz_numbers
     for (char* pch = strtok(sz_buffer, sz_delimiters); pch; pch = strtok(NULL, sz_delimiters))
     {
         sz_numbers[n++] = pch;
@@ -328,13 +374,14 @@ std::istream& operator>>(std::istream& is, fraction& obj)
         break;
     case 3:obj(atoi(sz_numbers[0]), atoi(sz_numbers[1]), atoi(sz_numbers[2]));
     }
+    //for (int i = 0; i < n; i++)cout << sz_numbers[i] << "\t"; cout << endl;
     return is;
 }
 
 //#define CONSTRUCTORS_CHECK
 //#define COMPARISON_OPERATOR
 //#define CONVERTION_FROM_CLASS_TO_OTHER
-//#define COVERSIONS_HOME_WORK
+#define COVERSIONS_HOME_WORK
 
     void main()
     {
@@ -407,11 +454,11 @@ std::istream& operator>>(std::istream& is, fraction& obj)
         cout << A << endl;
 #endif // COVERSIONS_HOME_WORK
 
-        fraction A;
+  /*      fraction A;
         cout << "Введите простую дробь:"; 
         cin >> A;
 
-        cout << A << endl;
+        cout << A << endl;*/
 
         /*
 
