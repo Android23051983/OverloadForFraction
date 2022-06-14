@@ -109,6 +109,7 @@ std::ostream& operator<<(std::ostream& os, const String& obj)
 }
 
 //#define CONSTRACTORS_CHECK
+//#define STRING_CONCATENATION
 void main()
 {
 #ifdef CONSTRACTORS_CHECK
@@ -132,10 +133,15 @@ void main()
 	cout << str5 << endl;
 
 #endif // CONSTRACTORS_CHECK
+#ifdef STRING_CONCATENATION
 	String str1 = "Hello";
 	String str2 = "World";
 	//String str3 = str1 + str2;
 	//cout << str3 << endl;
 	str1 += str2;
 	cout << str1 << endl;
+#endif // STRING_CONCATENATION
+	String str;
+	cout << "¬ведите строку: "; cin >> str;
+
 }
