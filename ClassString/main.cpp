@@ -8,7 +8,7 @@ using std::endl;
 
 class String;
 String operator+(const String& left, const String& right);
-
+std::istream& operator>>(std::istream& is, String& obj);
 class String
 {
 	int size;
@@ -25,6 +25,10 @@ public:
 	char* get_str()
 	{
 		return str;
+	}
+	void set_str(char* str)
+	{
+		this->str = str;
 	}
 
 	explicit String(int size = 80)
@@ -61,6 +65,22 @@ public:
 		cout << "Size:\t" << size << endl;
 		cout << "Str:\t" << str << endl;
 	}
+
+	/*void to_upper()
+	{
+		for (int i = 0; i < size; i++)
+		{
+			this->str[i] + 32;
+		}
+	}*/
+
+	/*void to_lower()
+	{
+		for (int i = 0; i < size; i++)
+		{
+			this->str[i] - 32;
+		}
+	}*/
 
 	//   Operators
 	String& operator=(const String& other)
@@ -108,12 +128,20 @@ std::ostream& operator<<(std::ostream& os, const String& obj)
 	return os << obj.get_str();
 }
 
+std::istream& operator>>(std::istream& is, String& obj)
+{
+	const int SIZE = 256;
+	char sz_buffer[SIZE] = {};
+	is.getline(sz_buffer, SIZE);
+	obj = sz_buffer;
+	return is;
+}
+
 //#define CONSTRACTORS_CHECK
 //#define STRING_CONCATENATION
 void main()
 {
 #ifdef CONSTRACTORS_CHECK
-	setlocale(LC_ALL, "");
 	String str1;
 	str1.print();
 
@@ -141,7 +169,11 @@ void main()
 	str1 += str2;
 	cout << str1 << endl;
 #endif // STRING_CONCATENATION
+	system("chcp 1251");
+	//system("cls");
+	setlocale(LC_ALL, "");
 	String str;
+	cout << str << endl;
 	cout << "¬ведите строку: "; cin >> str;
-
+	str.print();
 }
