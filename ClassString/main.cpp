@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 
 using namespace std;
 
@@ -26,10 +26,10 @@ public:
 	{
 		return str;
 	}
-	void set_str(char* str)
+	/*void set_str(char* str)
 	{
 		this->str = str;
-	}
+	}*/
 
 	explicit String(int size = 80)
 	{
@@ -66,21 +66,46 @@ public:
 		cout << "Str:\t" << str << endl;
 	}
 
-	/*void to_upper()
+	void to_lower(const String& other)
 	{
-		for (int i = 0; i < size; i++)
+		for (int i = 0; str[i] != '\0'; i++)
 		{
-			this->str[i] + 32;
+			if (str[i] >= 'A' && str[i] <= 'Z')    //проверка заглавных букв
+				str[i] = str[i] + 32;         //преобразование верхнего регистра в нижний регистр
+		}
+	}
+
+	void to_upper(const String& other)
+	{
+		for (int i = 0; str[i] != '\0'; i++)
+		{
+			if (str[i] >= 'a' && str[i] <= 'z')   //проверка строчных букв
+				str[i] = str[i] - 32;        //преобразование нижнего регистра в верхний регистр  
+		}
+	}
+
+	/*bool is_palindrome()
+	{
+	int temp;
+	tenp 
+	
+		do
+		{
+			last_number = 10 * last_number + number % 10;
+			number /= 10;
+		} while (number != 0);
+
+		if (temp == last_number)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
 		}
 	}*/
 
-	/*void to_lower()
-	{
-		for (int i = 0; i < size; i++)
-		{
-			this->str[i] - 32;
-		}
-	}*/
+
 
 	//   Operators
 	String& operator=(const String& other)
@@ -88,7 +113,7 @@ public:
 		if (this == &other)return *this;
 		delete[] this->str;
 		this->size = other.size;
-		//CopyAssigment ��� �� ��������� Deep copy
+		//CopyAssigment так же выполняет Deep copy
 		this->str = new char[size] {};
 		for (int i = 0; i < size; i++)this->str[i] = other.str[i];
 		cout << "CopyAssigment:\t" << this << endl;
@@ -112,7 +137,7 @@ public:
 
 String operator+(const String& left, const String& right)
 {
-	//������������ �����
+	//Конкатенация строк
 	String cat(left.get_size() + right.get_size() - 1);
 	for (int i = 0; i < left.get_size(); i++)
 		cat[i] = left[i];
@@ -169,11 +194,16 @@ void main()
 	str1 += str2;
 	cout << str1 << endl;
 #endif // STRING_CONCATENATION
-	system("chcp 1251");
+	//system("chcp 1251");
 	//system("cls");
 	setlocale(LC_ALL, "");
 	String str;
 	cout << str << endl;
-	cout << "������� ������: "; cin >> str;
+	cout << "Введите строку заглавными символами: "; cin >> str;
+	str.print();
+	str.to_lower(str);
+	str.print();
+	cout << "Введите строку прописными символами: "; cin >> str;
+	str.to_upper(str);
 	str.print();
 }
