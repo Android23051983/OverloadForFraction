@@ -38,15 +38,15 @@ public:
 		//this->str = new char[size] {};
 		cout << "DefaultConstructor:\t" << this << endl;
 	}
-	String(const char* str) :size(strlen(str) + 1), str(new char[size] {})
+	String(const char* str) :String(strlen(str)+1)
 	{
 		//this->size = strlen(str) + 1;
 		//this->str = new char[size]();
 		for (int i = 0; i < size; i++)this->str[i] = str[i];
-		cout << "Constructor:\t" << this << endl;
+		cout << "Constructor:\t\t" << this << endl;
 	}
 
-	String(const String& other):size(other.size), str(new char[size] {})
+	String(const String& other):String(other.str)
 	{
 		//this->size = other.size;
 		//Deep copy
@@ -226,5 +226,7 @@ void main()
 	String str4();
 	String str5{};
 	str5.print();
+	String str6 = str3;
+	str6.print();
 
 }
