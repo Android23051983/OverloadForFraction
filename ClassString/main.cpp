@@ -1,5 +1,6 @@
 ﻿#include <iostream>
-
+#include <ctype.h>
+#include<Windows.h>
 using namespace std;
 
 using std::cin;
@@ -66,25 +67,31 @@ public:
 		cout << "Str:\t" << str << endl;
 	}
 
-	void to_lower(const String& other)
+	void to_lower()const
 	{
 		for (int i = 0; str[i] != '\0'; i++)
 		{
-			if (str[i] >= 'A' && str[i] <= 'Z')    //проверка заглавных букв
-				str[i] = str[i] + 32;         //преобразование верхнего регистра в нижний регистр
+			//if (str[i] >= 'A' && str[i] <= 'Z')    //проверка заглавных букв
+			//	str[i] = str[i] + 32;         //преобразование верхнего регистра в нижний регистр
+			//if (str[i] >= 'А' && str[i] <= 'Я')    //проверка заглавных букв
+			//	str[i] = str[i] + 32;
+			str[i] = tolower(str[i]);
 		}
 	}
 
-	void to_upper(const String& other)
+	void to_upper()const
 	{
 		for (int i = 0; str[i] != '\0'; i++)
 		{
-			if (str[i] >= 'a' && str[i] <= 'z')   //проверка строчных букв
-				str[i] = str[i] - 32;        //преобразование нижнего регистра в верхний регистр  
+			//if (str[i] >= 'a' && str[i] <= 'z')   //проверка строчных букв
+			//	str[i] = str[i] - 32;        //преобразование нижнего регистра в верхний регистр  
+			//if (str[i] >= 'а' && str[i] <= 'я')   //проверка строчных букв
+			//	str[i] = str[i] - 32;
+			str[i] = toupper(str[i]);
 		}
 	}
 
-	/*bool is_palindrome()
+	/*bool is_palindrome(const String& obj)
 	{
 	int temp;
 	tenp 
@@ -155,15 +162,17 @@ std::ostream& operator<<(std::ostream& os, const String& obj)
 
 std::istream& operator>>(std::istream& is, String& obj)
 {
-	const int SIZE = 256;
+	const int SIZE = 8192;
 	char sz_buffer[SIZE] = {};
-	is.getline(sz_buffer, SIZE);
+	//is.getline(sz_buffer, SIZE);// Взятие всех слов
+	is >> sz_buffer;//Взятие слова до пробела
 	obj = sz_buffer;
 	return is;
 }
 
 //#define CONSTRACTORS_CHECK
 //#define STRING_CONCATENATION
+//#define KEYBOARD_INPUT_CHECK
 void main()
 {
 #ifdef CONSTRACTORS_CHECK
@@ -194,16 +203,28 @@ void main()
 	str1 += str2;
 	cout << str1 << endl;
 #endif // STRING_CONCATENATION
+#ifdef KEYBOARD_INPUT_CHECK
 	//system("chcp 1251");
-	//system("cls");
+//system("cls");
 	setlocale(LC_ALL, "");
 	String str;
 	cout << str << endl;
 	cout << "Введите строку заглавными символами: "; cin >> str;
 	str.print();
-	str.to_lower(str);
+	str.to_lower();
 	str.print();
 	cout << "Введите строку прописными символами: "; cin >> str;
-	str.to_upper(str);
+	str.to_upper();
 	str.print();
+#endif // KEYBOARD_INPUT_CHECK
+	String str1; //Default constrictor
+	str1.print();
+	String str2(22);
+	str2.print();
+	String str3 = "Hello";
+	str3.print();
+	String str4();
+	String str5{};
+	str5.print();
+
 }
