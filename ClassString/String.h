@@ -11,6 +11,7 @@ using std::endl;
 class String;
 String operator+(const String& left, const String& right);
 std::istream& operator>>(std::istream& is, String& obj);
+std::ostream& operator<<(std::ostream& os, const String& obj);
 class String
 {
 	int size;

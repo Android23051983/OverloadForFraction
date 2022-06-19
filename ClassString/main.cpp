@@ -3,8 +3,9 @@
 
 
 //#define CONSTRACTORS_CHECK
-//#define STRING_CONCATENATION
+#define STRING_CONCATENATION
 //#define KEYBOARD_INPUT_CHECK
+//#define CALLING_CONCTRUCTOR
 void main()
 {
 #ifdef CONSTRACTORS_CHECK
@@ -49,6 +50,7 @@ void main()
 	str.to_upper();
 	str.print();
 #endif // KEYBOARD_INPUT_CHECK
+#ifdef CALLING_CONCTRUCTOR
 	String str1; //Default constrictor
 	str1.print();
 	String str2(22);
@@ -60,5 +62,7 @@ void main()
 	str5.print();
 	String str6 = str3;
 	str6.print();
+#endif // CALLING_CONCTRUCTOR
+
 
 }
