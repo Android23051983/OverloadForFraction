@@ -24,13 +24,13 @@ public:
 	{
 		this->str = str;
 	}*/
+
 	// Constructors:
 
 	explicit String(int size = 80);
 	String(const char* str);
-
 	String(const String& other);
-
+	String(String&& other);
 	~String();
 
 	void print()const;

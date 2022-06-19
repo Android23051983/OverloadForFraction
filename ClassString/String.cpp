@@ -39,6 +39,14 @@ String::String(const String& other) :String(other.str)
 	cout << "CopyComstructor:\t" << this << endl;
 }
 
+String:: String(String&& other)
+{
+	this->size = other.size;
+	this->str = other.str;
+	other.str = nullptr;
+	cout << "MoveConstructor:\t" << this << endl;
+}
+
 String::~String()
 {
 	delete[] this->str;

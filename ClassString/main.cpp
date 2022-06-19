@@ -31,10 +31,10 @@ void main()
 #ifdef STRING_CONCATENATION
 	String str1 = "Hello";
 	String str2 = "World";
-	//String str3 = str1 + str2;
+	String str3 = str1 + str2;
 	//cout << str3 << endl;
-	str1 += str2;
-	cout << str1 << endl;
+	//str1 += str2;
+	cout << str3 << endl;
 #endif // STRING_CONCATENATION
 #ifdef KEYBOARD_INPUT_CHECK
 	//system("chcp 1251");
