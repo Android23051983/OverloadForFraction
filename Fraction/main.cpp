@@ -75,6 +75,7 @@
 #ifdef COVERSIONS_HOME_WORK
         fraction A = 2.75;
         cout << A << endl;
+        A.print();
 #endif // COVERSIONS_HOME_WORK
 
   /*      fraction A;

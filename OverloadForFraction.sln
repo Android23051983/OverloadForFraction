@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "String", "String\String.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ClassString", "ClassString\ClassString.vcxproj", "{35DA30BF-FEC8-47B8-88A0-4E373F8D5196}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Point", "Point\Point.vcxproj", "{1DB83313-7BF8-448B-A04A-281EFD8D2ADB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{35DA30BF-FEC8-47B8-88A0-4E373F8D5196}.Release|x64.Build.0 = Release|x64
 		{35DA30BF-FEC8-47B8-88A0-4E373F8D5196}.Release|x86.ActiveCfg = Release|Win32
 		{35DA30BF-FEC8-47B8-88A0-4E373F8D5196}.Release|x86.Build.0 = Release|Win32
+		{1DB83313-7BF8-448B-A04A-281EFD8D2ADB}.Debug|x64.ActiveCfg = Debug|x64
+		{1DB83313-7BF8-448B-A04A-281EFD8D2ADB}.Debug|x64.Build.0 = Debug|x64
+		{1DB83313-7BF8-448B-A04A-281EFD8D2ADB}.Debug|x86.ActiveCfg = Debug|Win32
+		{1DB83313-7BF8-448B-A04A-281EFD8D2ADB}.Debug|x86.Build.0 = Debug|Win32
+		{1DB83313-7BF8-448B-A04A-281EFD8D2ADB}.Release|x64.ActiveCfg = Release|x64
+		{1DB83313-7BF8-448B-A04A-281EFD8D2ADB}.Release|x64.Build.0 = Release|x64
+		{1DB83313-7BF8-448B-A04A-281EFD8D2ADB}.Release|x86.ActiveCfg = Release|Win32
+		{1DB83313-7BF8-448B-A04A-281EFD8D2ADB}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
