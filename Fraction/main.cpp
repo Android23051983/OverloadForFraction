@@ -1,6 +1,5 @@
 #include"Fraction.h"
 
-  
 
 //#define CONSTRUCTORS_CHECK
 //#define COMPARISON_OPERATOR
@@ -79,7 +78,7 @@
 #endif // COVERSIONS_HOME_WORK
 
   /*      fraction A;
-        cout << "Ââåäèòå ïðîñòóþ äðîáü:"; 
+        cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¿Ñ€Ð¾ÑÑ‚ÑƒÑŽ Ð´Ñ€Ð¾Ð±ÑŒ:"; 
         cin >> A;
 
         cout << A << endl;*/
