@@ -91,26 +91,11 @@ public:
 		}
 	}
 
-	/*bool is_palindrome(const String& obj)
+	/*void is_palindrome()const
 	{
-	int temp;
-	tenp 
-	
-		do
-		{
-			last_number = 10 * last_number + number % 10;
-			number /= 10;
-		} while (number != 0);
-
-		if (temp == last_number)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		
 	}*/
+	
 
 
 
@@ -217,14 +202,19 @@ void main()
 	str.to_upper();
 	str.print();
 #endif // KEYBOARD_INPUT_CHECK
-	String str1; //Default constrictor
-	str1.print();
-	String str2(22);
-	str2.print();
-	String str3 = "Hello";
-	str3.print();
-	String str4();
-	String str5{};
-	str5.print();
+	//String str1; //Default constrictor
+	//str1.print();
+	//String str2(22);
+	//str2.print();
+	//String str3 = "Hello";
+	//str3.print();
+	//String str4();
+	//String str5{};
+	//str5.print();
+	String str;
+	cout << "Enter the word: ";
+	cin >> str;
+	str.is_palindrome();
+	
 
 }
