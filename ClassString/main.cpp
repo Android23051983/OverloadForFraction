@@ -91,9 +91,9 @@ public:
 		}
 	}
 
-	/*void is_palindrome()const
+	/*void is_palindrome()
 	{
-		
+
 	}*/
 	
 
