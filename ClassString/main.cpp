@@ -60,7 +60,7 @@ public:
 		this->size = other.size;
 		this->str = other.str;
 		other.str = nullptr;
-		cout << "MoveConstructor:" << this << endl;
+		cout << "MoveConstructor:\t" << this << endl;
 	}
 
 	~String()
@@ -115,7 +115,7 @@ public:
 		//CopyAssigment так же выполняет Deep copy
 		this->str = new char[size] {};
 		for (int i = 0; i < size; i++)this->str[i] = other.str[i];
-		cout << "CopyAssigment:\t" << this << endl;
+		cout << "CopyAssigment:\t\t" << this << endl;
 		return *this;
 	}
 
@@ -125,7 +125,7 @@ public:
 		this->str = other.str;
 		this->size = other.size;
 		other.str = nullptr;
-		cout << "MoveAssigment:\t\t" << this << endl;
+		cout << "MoveAssignment:\t\t" << this << endl;
 		return *this;
 	}
 
@@ -202,9 +202,9 @@ void main()
 	String str2 = "World";
 	cout << "\n-------------------------------\n" << endl;
 	String str3;
-	str3 = std::move(str2);
+	str1 = str1 + str2;
 	cout << "\n-------------------------------\n" << endl;
-	cout << str3 << endl;
+	cout << str1 << endl;
 	//str1 += str2;
 	//cout << str1 << endl;
 #endif // STRING_CONCATENATION
