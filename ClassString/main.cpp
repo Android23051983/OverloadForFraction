@@ -90,13 +90,12 @@ public:
 			str[i] = toupper(str[i]);
 		}
 	}
-
-	/*void is_palindrome()
+	/*bool is_palindrome(const String& obj)
 	{
-
+		for (int i = 0;; i++)((i == (obj.get_size() - i - 1)) || ((i - (obj.get_size() - i - 1)) == 1) ? "Палиндром" : "Не Палиндром");
+		
 	}*/
 	
-
 
 
 	//   Operators
@@ -111,6 +110,8 @@ public:
 		cout << "CopyAssigment:\t" << this << endl;
 		return *this;
 	}
+
+
 
 	String& operator+=(const String& other)
 	{
@@ -214,7 +215,7 @@ void main()
 	String str;
 	cout << "Enter the word: ";
 	cin >> str;
-	str.is_palindrome();
+
 	
 
 }
