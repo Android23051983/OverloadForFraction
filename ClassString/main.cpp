@@ -55,7 +55,7 @@ public:
 		cout << "CopyComstructor:\t" << this << endl;
 	}
 
-	String(String&& other)
+	String(String&& other) noexcept
 	{
 		this->size = other.size;
 		this->str = other.str;
@@ -119,14 +119,14 @@ public:
 		return *this;
 	}
 
-	String& operator=(String&& other) noexcept
+	String& operator=(String&& other) 
 	{
 		delete[] str;
-		str = other.str;
-		size = other.size;
-
-		size = 0;
-		str = new char[size] {};
+		this->str = other.str;
+		this->size = other.size;
+		other.str = nullptr;
+		cout << "MoveAssigment:\t\t" << this << endl;
+		return *this;
 	}
 
 	String& operator+=(const String& other)
@@ -173,7 +173,7 @@ std::istream& operator>>(std::istream& is, String& obj)
 }
 
 //#define CONSTRACTORS_CHECK
-//#define STRING_CONCATENATION
+#define STRING_CONCATENATION
 //#define KEYBOARD_INPUT_CHECK
 void main()
 {
@@ -200,10 +200,13 @@ void main()
 #ifdef STRING_CONCATENATION
 	String str1 = "Hello";
 	String str2 = "World";
-	//String str3 = str1 + str2;
-	//cout << str3 << endl;
-	str1 += str2;
-	cout << str1 << endl;
+	cout << "\n-------------------------------\n" << endl;
+	String str3;
+	str3 = std::move(str2);
+	cout << "\n-------------------------------\n" << endl;
+	cout << str3 << endl;
+	//str1 += str2;
+	//cout << str1 << endl;
 #endif // STRING_CONCATENATION
 #ifdef KEYBOARD_INPUT_CHECK
 	//system("chcp 1251");
@@ -228,9 +231,7 @@ void main()
 	//String str4();
 	//String str5{};
 	//str5.print();
-	String str;
-	cout << "Enter the word: ";
-	cin >> str;
+
 
 	
 
