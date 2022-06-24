@@ -55,6 +55,14 @@ public:
 		cout << "CopyComstructor:\t" << this << endl;
 	}
 
+	String(String&& other)
+	{
+		this->size = other.size;
+		this->str = other.str;
+		other.str = nullptr;
+		cout << "MoveConstructor:" << this << endl;
+	}
+
 	~String()
 	{
 		delete[] this->str;
@@ -111,7 +119,15 @@ public:
 		return *this;
 	}
 
+	String& operator=(String&& other) noexcept
+	{
+		delete[] str;
+		str = other.str;
+		size = other.size;
 
+		size = 0;
+		str = new char[size] {};
+	}
 
 	String& operator+=(const String& other)
 	{
